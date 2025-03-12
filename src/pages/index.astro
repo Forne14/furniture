@@ -1,62 +1,112 @@
 ---
-// Frontmatter (JavaScript/TypeScript)
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
+import GradientBorder from '../components/GradientBorder.astro';
 import PreOrderModal from '../components/PreOrderModal.astro';
 ---
 
-<Layout title="Artisan Furnishings">
-  <main class="min-h-screen bg-cream">
-    <!-- Hero Section -->
-    <section class="grid md:grid-cols-2 min-h-screen relative">
-      <div class="bg-charcoal flex items-center justify-end">
-        <div class="max-w-md p-8 text-cream">
-          <h1 class="text-5xl font-serif mb-6 leading-tight">
-            Crafted Legacy<br>
-            <span class="text-gold">Timeless Design</span>
-          </h1>
-          <button 
-            id="preorderBtn"
-            class="bg-gold text-charcoal px-8 py-4 hover:bg-charcoal hover:text-gold transition-all flex items-center gap-2"
-          >
-            Pre-Order Collection
-            <span class="text-xl">→</span>
-          </button>
+<Layout title="LuxeLiving | Modern Furniture">
+  <main class="min-h-screen bg-neutral-900 text-gray-100">
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 bg-neutral-900/80 backdrop-blur-md z-50">
+      <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold">LuxeLiving</h1>
+        <div class="space-x-8">
+          <a href="#collections" class="hover:text-amber-300 transition-colors">Collections</a>
+          <a href="#craftsmanship" class="hover:text-amber-300 transition-colors">Craftsmanship</a>
         </div>
       </div>
+    </nav>
 
-      <div class="relative">
-        <img 
-          src="/images/hero-chair.webp" 
-          alt="Luxury armchair" 
-          class="w-full h-full object-cover"
-          loading="eager"
-        />
-        <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]"></div>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center">
+      <GradientBorder>
+        <div class="container mx-auto px-6">
+          <div class="max-w-2xl">
+            <h2 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+              Elevate Your Space with 
+              <span class="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
+                Timeless Design
+              </span>
+            </h2>
+            <button 
+              id="preorderBtn"
+              class="bg-gradient-to-r from-amber-400 to-amber-600 text-neutral-900 px-8 py-4 rounded-full 
+                     hover:scale-105 transition-transform font-semibold shadow-lg shadow-amber-500/20"
+            >
+              Pre-Order Limited Collection →
+            </button>
+          </div>
+        </div>
+      </GradientBorder>
+      
+      <!-- Background Image with Parallax Effect -->
+      <img 
+        src="/images/hero-modern.webp" 
+        alt="Modern luxury furniture" 
+        class="absolute inset-0 w-full h-full object-cover -z-10 opacity-40"
+        loading="eager"
+      />
+    </section>
+
+    <!-- Featured Collections -->
+    <section id="collections" class="py-20 bg-neutral-800/30">
+      <div class="container mx-auto px-6">
+        <h3 class="text-4xl font-bold mb-12">Signature Collections</h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <article class="group relative overflow-hidden rounded-2xl">
+            <img 
+              src="/images/collection-1.webp" 
+              class="w-full h-96 object-cover group-hover:scale-105 transition-transform"
+              alt="Modular series"
+            />
+            <div class="absolute bottom-0 p-6 bg-gradient-to-t from-neutral-900 w-full">
+              <h4 class="text-xl font-semibold mb-2">Modular Elegance</h4>
+              <p class="text-amber-400">From £8,900</p>
+            </div>
+          </article>
+          <!-- Repeat similar blocks for other collections -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section id="craftsmanship" class="py-20">
+      <div class="container mx-auto px-6 max-w-4xl">
+        <div class="text-center">
+          <span class="text-amber-400 uppercase tracking-widest">Artisan Legacy</span>
+          <h3 class="text-4xl font-bold mt-4 mb-8">Precision Meets Passion</h3>
+          <p class="text-xl text-neutral-300 leading-relaxed">
+            Each piece undergoes 200+ hours of meticulous craftsmanship, blending cutting-edge 
+            technology with traditional techniques perfected over generations.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- Pre-Order Modal -->
     <PreOrderModal client:load />
-
-    <!-- Script for modal interaction -->
-    <script>
-      const modal = document.getElementById('preorderModal');
-      document.getElementById('preorderBtn').addEventListener('click', () => {
-        modal.classList.remove('hidden');
-      });
-    </script>
   </main>
 </Layout>
 
-<style>
-  :root {
-    --gold: #C5A47E;
-    --charcoal: #1A1A1A;
-    --cream: #F4F0EB;
+<style is:global>
+  @keyframes gradientShift {
+    0% { background-position: 0% 50% }
+    50% { background-position: 100% 50% }
+    100% { background-position: 0% 50% }
   }
 
-  .bg-gold { background-color: var(--gold); }
-  .text-gold { color: var(--gold); }
-  .bg-charcoal { background-color: var(--charcoal); }
-  .bg-cream { background-color: var(--cream); }
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(
+      45deg,
+      #f59e0b,
+      #d97706,
+      #b45309,
+      #d97706,
+      #f59e0b
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
+  }
 </style>
