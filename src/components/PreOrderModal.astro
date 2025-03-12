@@ -1,0 +1,36 @@
+---
+// PreOrderModal.astro
+---
+
+<div id="preorderModal" class="hidden fixed inset-0 bg-black/50 z-50">
+    <div class="bg-cream p-12 max-w-2xl mx-auto my-24 relative">
+      <button 
+        onclick="document.getElementById('preorderModal').classList.add('hidden')"
+        class="absolute top-4 right-4 text-2xl"
+      >
+        ×
+      </button>
+      
+      <h2 class="text-3xl font-serif mb-8">Exclusive Pre-Order</h2>
+      <form class="space-y-6">
+        <input 
+          type="text" 
+          placeholder="Full Name" 
+          class="w-full p-3 border border-charcoal/20"
+        >
+        <input 
+          type="email" 
+          placeholder="Email" 
+          class="w-full p-3 border border-charcoal/20"
+        >
+        <select class="w-full p-3 border border-charcoal/20">
+          <option>Select Collection</option>
+          <option>Heritage Line</option>
+          <option>Modernist Series</option>
+        </select>
+        <button class="bg-charcoal text-cream px-8 py-3 w-full hover:bg-gold">
+          Reserve Now
+        </button>
+      </form>
+    </div>
+  </div>

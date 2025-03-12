@@ -1,11 +1,62 @@
 ---
-import Welcome from '../components/Welcome.astro';
+// Frontmatter (JavaScript/TypeScript)
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import PreOrderModal from '../components/PreOrderModal.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Artisan Furnishings">
+  <main class="min-h-screen bg-cream">
+    <!-- Hero Section -->
+    <section class="grid md:grid-cols-2 min-h-screen relative">
+      <div class="bg-charcoal flex items-center justify-end">
+        <div class="max-w-md p-8 text-cream">
+          <h1 class="text-5xl font-serif mb-6 leading-tight">
+            Crafted Legacy<br>
+            <span class="text-gold">Timeless Design</span>
+          </h1>
+          <button 
+            id="preorderBtn"
+            class="bg-gold text-charcoal px-8 py-4 hover:bg-charcoal hover:text-gold transition-all flex items-center gap-2"
+          >
+            Pre-Order Collection
+            <span class="text-xl">→</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="relative">
+        <img 
+          src="/images/hero-chair.webp" 
+          alt="Luxury armchair" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.3)]"></div>
+      </div>
+    </section>
+
+    <!-- Pre-Order Modal -->
+    <PreOrderModal client:load />
+
+    <!-- Script for modal interaction -->
+    <script>
+      const modal = document.getElementById('preorderModal');
+      document.getElementById('preorderBtn').addEventListener('click', () => {
+        modal.classList.remove('hidden');
+      });
+    </script>
+  </main>
 </Layout>
+
+<style>
+  :root {
+    --gold: #C5A47E;
+    --charcoal: #1A1A1A;
+    --cream: #F4F0EB;
+  }
+
+  .bg-gold { background-color: var(--gold); }
+  .text-gold { color: var(--gold); }
+  .bg-charcoal { background-color: var(--charcoal); }
+  .bg-cream { background-color: var(--cream); }
+</style>
